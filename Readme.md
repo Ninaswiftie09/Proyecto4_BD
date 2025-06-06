@@ -27,6 +27,12 @@ Creamos un sistema para poder ver y adquirir entradas para diferentes conciertos
 
 ## Como correrlo
 
+Antes de realizar algún paso, debes clonar el repositorio.
+
+```bash
+    git clone https://github.com/Ninaswiftie09/Proyecto4_BD
+```
+
 ### 1. Construir y levantar los servicios
 
 Desde la carpeta del proyecto ejecuta el siguiente comando: 
