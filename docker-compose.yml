@@ -22,7 +22,7 @@ services:
 
   db:
     image: postgres:15
-    container_name: postgres_db
+    container_name: postgres_pry4BD
     environment:
       POSTGRES_DB: evento_musical_db
       POSTGRES_USER: user
@@ -41,7 +41,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
+    container_name: pgadmin_pry4BD
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
