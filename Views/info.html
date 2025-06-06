@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del Concierto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Concierto: Festival Aurora</h1>
+    <p><strong>Fecha:</strong> 12/07/2025</p>
+    <p><strong>Ubicación:</strong> Ciudad de Guatemala, Guatemala</p>
+    <p><strong>Descripción:</strong> bla bla bla</p>
+
+    <h2>Entradas disponibles</h2>
+    <ul>
+      <li>General - Q50</li>
+      <li>VIP - Q120</li>
+      <li>Backstage - Q300</li>
+    </ul>
+
+    <button id="btnComprar">Adquirir entrada</button>
+  </div>
+
+  <div class="modal" id="modalCompra">
+    <div class="modal-content">
+      <span class="close" id="cerrarModal">&times;</span>
+      <h2>Formulario de compra</h2>
+      <form action="/comprar/" method="post">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" required>
+
+        <label for="tipoEntrada">Tipo de entrada:</label>
+        <select id="tipoEntrada" name="tipoEntrada" required>
+          <option value="General">General</option>
+          <option value="VIP">VIP</option>
+          <option value="Backstage">Backstage</option>
+        </select>
+
+        <label for="metodoPago">Método de pago:</label>
+        <select id="metodoPago" name="metodoPago" required>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Tarjeta">Tarjeta</option>
+          <option value="Transferencia">Transferencia</option>
+        </select>
+
+        <button type="submit">Confirmar compra</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modalCompra');
+    const btn = document.getElementById('btnComprar');
+    const span = document.getElementById('cerrarModal');
+
+    btn.onclick = () => modal.style.display = 'block';
+    span.onclick = () => modal.style.display = 'none';
+    window.onclick = (event) => {
+      if (event.target == modal) modal.style.display = 'none';
+    };
+  </script>
+</body>
+</html>
