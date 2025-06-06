@@ -67,11 +67,11 @@ Desde la carpeta del proyecto ejecuta el siguiente comando:
 
     Si las tablas no se han creado automáticamente, entra al contenedor de Django y ejecuta las migraciones:
 
-    ```bash
+ ```bash
     docker exec -it evento_musical_backend bash
     python manage.py makemigrations
     python manage.py migrate
-    ```
+```
 
 ### 4. Insertar datos de prueba
 
