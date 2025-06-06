@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 GENERO_MUSICAL = [
     ('Rock', 'Rock'),
@@ -14,6 +15,7 @@ GENERO_MUSICAL = [
 class Artista(models.Model):
     nombre = models.CharField(max_length=100)
     genero = models.CharField(max_length=30, choices=GENERO_MUSICAL)
+    alias = models.CharField(max_length=100, unique=True, null= True)
     pais = models.CharField(max_length=50)
     biografia = models.TextField()
 
@@ -52,9 +54,6 @@ class Evento(models.Model):
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE)
     descripcion = models.TextField()
 
-    class Meta:
-        abstract = True
-
 # 6. tabla para conciertos 
 class Concierto(Evento):
     hora_inicio = models.TimeField()
@@ -89,21 +88,20 @@ class Entrada(models.Model):
     ]
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
     tipo_entrada = models.CharField(max_length=20, choices=TIPOS_ENTRADA)
-    precio = models.DecimalField(max_digits=8, decimal_places=2)
+    precio = models.DecimalField(max_digits=6, decimal_places=2, default=50)
     cantidad_disponible = models.IntegerField()
 
 
 # 12. tabla para clientes
 class Cliente(models.Model):
-    nombre = models.CharField(max_length=100)
-    email = models.EmailField()
-    telefono = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=100, null=False)
+    email = models.EmailField(null=False)
 
 # 13. tabla para ventas
 class Venta(models.Model):
     entrada = models.ForeignKey(Entrada, on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    fecha_venta = models.DateField()
+    fecha_venta = models.DateField(auto_now_add=True)
 
 # 14. tabla para los pagos
 class Pago(models.Model):
@@ -139,13 +137,18 @@ class StaffEvento(models.Model):
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
 
 # 19. tabla de reseñas de los clientes
-class Reseña(models.Model):
+class Resena(models.Model):
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    calificacion = models.IntegerField()
+    calificacion = models.IntegerField(
+    validators=[MinValueValidator(1), MaxValueValidator(5)] )
     comentario = models.TextField()
-
 # 20. artista-evento
 class ParticipacionEvento(models.Model):
     artista = models.ForeignKey(Artista, on_delete=models.CASCADE)
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+
+# 21. tabla para telefonos de los clientes
+class TelefonoCliente(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    numero = models.CharField(max_length=20)
