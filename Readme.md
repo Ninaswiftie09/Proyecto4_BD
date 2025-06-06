@@ -87,7 +87,7 @@ Desde la carpeta del proyecto ejecuta el siguiente comando:
 ### 5. Ver la interfaz web
         1. Navega a la carpeta Views/
 
-        2. Abre el archivo index.html con tu navegador favorito
+        2. Abre el archivo index.html 
 
         3. ¡Listo! Ya puedes ver los conciertos disponibles, leer reseñas y adquirir entradas 
 
