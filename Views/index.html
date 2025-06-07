@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos Musicales</title>
     <link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+  <title>Descargar Archivos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    select, button {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
     <header>
@@ -28,7 +42,41 @@
                 </div>
             </div>
         </section>
+        <body>
+  <h2>Selecciona una tabla (simulada):</h2>
+  <select id="tabla">
+    <option value="artista">artista</option>
+    <option value="evento">evento</option>
+    <option value="cliente">cliente</option>
+    <option value="venta">venta</option>
+    <option value="entrada">entrada</option>
+  </select>
 
+  <br>
+
+  <button onclick="descargarCSV()">Descargar CSV </button>
+  <button onclick="descargarPDF()">Descargar PDF </button>
+
+  <script>
+    function descargarCSV() {
+      const tabla = document.getElementById("tabla").value;
+      const blob = new Blob([""], { type: "text/csv" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${tabla}.csv`;
+      link.click();
+    }
+
+    function descargarPDF() {
+      const tabla = document.getElementById("tabla").value;
+      const blob = new Blob([""], { type: "application/pdf" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${tabla}.pdf`;
+      link.click();
+    }
+  </script>
+</body>
         <section class="resenas">
             <h2>Reseñas</h2>
             <div class="lista-resenas">
