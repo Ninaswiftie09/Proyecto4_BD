@@ -56,6 +56,44 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+-- 4. Validar que el cliente haya comprado entrada para ese evento
+CREATE OR REPLACE FUNCTION cliente_tiene_venta_para_evento()
+RETURNS TRIGGER AS $$
+DECLARE
+    coincidencias INT;
+BEGIN
+    SELECT COUNT(*) INTO coincidencias
+    FROM venta v
+    JOIN entrada e ON v.entrada_id = e.id
+    WHERE v.cliente_id = NEW.cliente_id
+      AND e.evento_id = NEW.evento_id;
+
+    IF coincidencias = 0 THEN
+        RAISE EXCEPTION 'El cliente no ha comprado entrada para este evento.';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+-- 5. Validar que no se repita staff en el mismo evento
+CREATE OR REPLACE FUNCTION staff_ya_asignado()
+RETURNS TRIGGER AS $$
+DECLARE
+    existe INT;
+BEGIN
+    SELECT COUNT(*) INTO existe
+    FROM staffevento
+    WHERE staff_id = NEW.staff_id AND evento_id = NEW.evento_id;
+
+    IF existe > 0 THEN
+        RAISE EXCEPTION 'Este staff ya está asignado a este evento.';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
 -- ========================
 -- TRIGGERS
@@ -79,3 +117,14 @@ BEFORE INSERT ON pago
 FOR EACH ROW
 EXECUTE FUNCTION validar_pago_monto();
 
+-- 4. Validar que el cliente reseñe solo eventos a los que asistió
+CREATE TRIGGER trg_validar_resena
+BEFORE INSERT ON resena
+FOR EACH ROW
+EXECUTE FUNCTION cliente_tiene_venta_para_evento();
+
+-- 5. Validar staff duplicado en evento
+CREATE TRIGGER trg_validar_staff
+BEFORE INSERT ON staffevento
+FOR EACH ROW
+EXECUTE FUNCTION staff_ya_asignado();
