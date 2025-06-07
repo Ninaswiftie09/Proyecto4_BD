@@ -14,7 +14,7 @@ Rivera Rodriguez, Alejandro - 23674
 Yee Vidal, María José - 231193 
 
 ## ¿Qué es?
-Creamos un sistema para poder ver y adquirir entradas para diferentes conciertos y festivales.
+Creamos un sistema para poder ver y adquirir entradas para diferentes conciertos y festivales y eventos de musica en general.
 
 ## Requisitos cumplidos
 - 21 tablas creadas con ORM (con tablas de cruce, relaciones 1:N y N:M, atributos multivaluados, datos personalizados, normalización hasta 3FN) 
