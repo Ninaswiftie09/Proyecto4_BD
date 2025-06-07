@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del Concierto</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1c1c1c;
+      color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background-color: #2b2b2b;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(255, 145, 77, 0.3);
+    }
+    h1 {
+      color: #ff914d;
+      margin-bottom: 1rem;
+    }
+    p {
+      margin: 0.5rem 0;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      padding: 0.5rem 0;
+    }
+    button {
+      background-color: #ff914d;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      color: #1c1c1c;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #ffa366;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .modal-content {
+      background-color: #1c1c1c;
+      color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
+    }
+    .close {
+      color: #ff6600;
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 4px;
+      border: none;
+    }
+    form button {
+      background-color: #ff6600;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #e65c00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Concierto: Festival Aurora</h1>
+    <p><strong>Fecha:</strong> 12/07/2025</p>
+    <p><strong>Ubicación:</strong> Ciudad de Guatemala, Guatemala</p>
+    <p><strong>Descripción:</strong> bla bla bla</p>
+
+    <h2>Entradas disponibles</h2>
+    <ul>
+      <li>General - Q50</li>
+      <li>VIP - Q120</li>
+      <li>Backstage - Q300</li>
+    </ul>
+
+    <button id="btnComprar">Adquirir entrada</button>
+  </div>
+
+  <div class="modal" id="modalCompra">
+    <div class="modal-content">
+      <span class="close" id="cerrarModal">&times;</span>
+      <h2>Formulario de compra</h2>
+      <form action="/comprar/" method="post">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" required>
+
+        <label for="tipoEntrada">Tipo de entrada:</label>
+        <select id="tipoEntrada" name="tipoEntrada" required>
+          <option value="General">General</option>
+          <option value="VIP">VIP</option>
+          <option value="Backstage">Backstage</option>
+        </select>
+
+        <label for="metodoPago">Método de pago:</label>
+        <select id="metodoPago" name="metodoPago" required>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Tarjeta">Tarjeta</option>
+          <option value="Transferencia">Transferencia</option>
+        </select>
+
+        <button type="submit">Confirmar compra</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modalCompra');
+    const btn = document.getElementById('btnComprar');
+    const span = document.getElementById('cerrarModal');
+
+    btn.onclick = () => modal.style.display = 'block';
+    span.onclick = () => modal.style.display = 'none';
+    window.onclick = (event) => {
+      if (event.target == modal) modal.style.display = 'none';
+    };
+  </script>
+</body>
+</html>

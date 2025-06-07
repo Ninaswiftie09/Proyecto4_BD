@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Listado de Artistas</h2>
+  <p><a href="{% url 'artista-create' %}">+ Nuevo Artista</a></p>
+  <table border="1" cellpadding="4">
+    <thead>
+      <tr>
+        <th>Nombre</th><th>Alias</th><th>Género</th><th>País</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in artistas %}
+        <tr>
+          <td>{{ a.nombre }}</td>
+          <td>{{ a.alias }}</td>
+          <td>{{ a.genero }}</td>
+          <td>{{ a.pais }}</td>
+          <td>
+            <a href="{% url 'artista-update' a.id %}">Editar</a> |
+            <a href="{% url 'artista-delete' a.id %}">Borrar</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5">No hay artistas registrados.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if object %}Editar Entrada{% else %}Crear Entrada{% endif %} – Proyecto BD
+{% endblock %}
+
+{% block header_title %}
+  {% if object %}Editar Entrada{% else %}Crear Entrada{% endif %}
+{% endblock %}
+
+{% block content %}
+  <h2>{% if object %}Editar{% else %}Crear{% endif %} Entrada</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+    <a href="{% url 'entrada-list' %}">Cancelar</a>
+  </form>
+{% endblock %}

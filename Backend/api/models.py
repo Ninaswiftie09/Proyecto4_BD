@@ -152,3 +152,39 @@ class ParticipacionEvento(models.Model):
 class TelefonoCliente(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     numero = models.CharField(max_length=20)
+
+
+
+class ArtistaView(models.Model):
+    id     = models.IntegerField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    alias  = models.CharField(max_length=100, null=True)
+    genero = models.CharField(max_length=30)
+    pais   = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'view_artista'
+        
+        
+class ClienteView(models.Model):
+    id     = models.IntegerField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    email  = models.EmailField()
+
+    class Meta:
+        managed = False
+        db_table = 'view_cliente'
+        
+class EntradaView(models.Model):
+    id                  = models.IntegerField(primary_key=True)
+    tipo_entrada        = models.CharField(max_length=20)
+    precio              = models.DecimalField(max_digits=6, decimal_places=2)
+    cantidad_disponible = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'view_entrada'
+        
+        
+
