@@ -18,11 +18,11 @@ Creamos un sistema para poder ver y adquirir entradas para diferentes conciertos
 
 ## Requisitos cumplidos
 - 21 tablas creadas con ORM (con tablas de cruce, relaciones 1:N y N:M, atributos multivaluados, datos personalizados, normalización hasta 3FN) 
-- Cruds para ver, crear y editar y eliminar regristros ⛔
-- Validaciones mediante restricciones, triggers y funciones SQL ⛔
-- 2 vistas con html, css y js ** (falta el javascript) ** 
+- Cruds para ver, crear y editar y eliminar regristros 
+- Validaciones mediante restricciones, triggers y funciones SQL 
+- 2 vistas con html, css y js 
 - Exportación de datos a CSV y PDF ⛔
-- 1000 inserts ⛔
+- 1000 inserts 
 - Desarrollo de 3 reportes distintos ( Cada uno debe tener al menos 5 filtros significativos) ⛔
 
 ## Como correrlo
@@ -91,6 +91,10 @@ Desde la carpeta del proyecto ejecuta el siguiente comando:
 
         3. ¡Listo! Ya puedes ver los conciertos disponibles, leer reseñas y adquirir entradas 
 
+        
+### 5.1 Ver opciones de editar eliminar y agregar 
+
+        1. ingresa desde el navegador al http://localhost:8000/artistas/
 
 
 
