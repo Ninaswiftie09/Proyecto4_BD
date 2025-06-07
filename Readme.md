@@ -92,3 +92,42 @@ Desde la carpeta del proyecto ejecuta el siguiente comando:
         3. ¡Listo! Ya puedes ver los conciertos disponibles, leer reseñas y adquirir entradas 
 
 
+
+
+### Descripción de los trigger y funciones 
+
+    Validaciones y Reglas del Proyecto
+    Este sistema incluye validaciones tanto a nivel de aplicación (usando Django ORM) como a nivel de base de datos (usando SQL puro con PostgreSQL). A continuación, se detallan:
+
+    ✅ Validaciones en la Aplicación (Django ORM)
+        1. Restricciones NOT NULL y UNIQUE: definidas en modelos como Cliente, Artista, Entrada, etc.
+
+        2. Valores por defecto (DEFAULT): por ejemplo, el campo precio en Entrada tiene un valor por defecto de 50.
+
+        3. Restricciones por validadores: la calificación de una Reseña está limitada a valores entre 1 y 5.
+
+        4. Relaciones entre tablas: gestionadas con claves foráneas (ForeignKey) y restricciones on_delete.
+
+    ⚙️ Validaciones en la Base de Datos (SQL)
+        - Se implementaron 5 funciones y 5 triggers en SQL para reforzar la integridad de los datos.
+
+    📄 Archivo SQL: 02-triggers.sql, ejecutado automáticamente al iniciar el contenedor PostgreSQL.
+
+    🧠 Funciones SQL definidas por el usuario
+        1. verificar_stock_entrada()	Verifica que haya entradas disponibles antes de una venta.
+        2. reducir_stock_entrada()	Resta una entrada disponible tras una venta exitosa.
+        3. validar_pago_monto()	Asegura que el pago coincide con el precio de la entrada.
+        4. cliente_tiene_venta_para_evento()	Verifica que el cliente haya comprado entrada antes de dejar una reseña.
+        5. staff_ya_asignado()	Impide que el mismo staff sea asignado más de una vez al mismo evento.
+
+    Triggers SQL implementados
+
+        1. trg_verificar_stock	BEFORE INSERT	venta	    Llama a verificar_stock_entrada()
+        2. trg_reducir_stock	AFTER INSERT	venta	    Llama a reducir_stock_entrada()
+        3. trg_validar_pago	    BEFORE INSERT	pago	    Llama a validar_pago_monto()
+        4. trg_validar_resena	BEFORE INSERT	resena	    Llama a cliente_tiene_venta_para_evento()
+        5. trg_validar_staff	BEFORE INSERT	staffevento	Llama a staff_ya_asignado()
+
+
+
+
