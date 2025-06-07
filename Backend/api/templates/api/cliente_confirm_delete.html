@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Eliminar Cliente</h2>
+  <p>¿Eliminar a “{{ object.nombre }}”?</p>
+  <form method="post">{% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+    <a href="{% url 'cliente-list' %}">No, volver</a>
+  </form>
+{% endblock %}
