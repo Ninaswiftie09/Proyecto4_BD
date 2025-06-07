@@ -32,6 +32,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       - ./Backend/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./Backend/02-triggers.sql:/docker-entrypoint-initdb.d/02-triggers.sql
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U user -d evento_musical_db"]
